@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class SerialAdmin extends AbstractAdmin
@@ -17,7 +18,8 @@ final class SerialAdmin extends AbstractAdmin
         $formMapper->add('description', TextType::class);
         $formMapper->add('createdAt', DateTimeType::class);
         $formMapper->add('genre', TextType::class);
-        $formMapper->add('imagePath', TextType::class);
+        $formMapper->add('imageFile', FileType::class);
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -26,7 +28,7 @@ final class SerialAdmin extends AbstractAdmin
         $datagridMapper->add('description');
         $datagridMapper->add('createdAt');
         $datagridMapper->add('genre');
-        $datagridMapper->add('imagePath');
+        $datagridMapper->add('image');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -35,6 +37,6 @@ final class SerialAdmin extends AbstractAdmin
         $listMapper->add('description');
         $listMapper->add('createdAt');
         $listMapper->add('genre');
-        $listMapper->add('imagePath');
+        $listMapper->add('image');
     }
 }
