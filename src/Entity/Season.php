@@ -1,8 +1,12 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 /**
  * Season
  *
@@ -43,6 +47,16 @@ class Season
      */
     private $endDate;
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $image;
+    /**
+     * @Vich\UploadableField(mapping="season_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Serial", inversedBy="seasons")
      */
     private $serial;
@@ -51,6 +65,31 @@ class Season
      * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="season")
      */
     private $episodes;
+
+    public function __construct()
+    {
+        $this->episodes = new ArrayCollection();
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
     /**
      * @return mixed
      */

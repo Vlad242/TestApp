@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.path.serial_images: /uploads/images/serial
+    app.path.season_images: /uploads/images/season
+    app.path.episode_images: /uploads/images/episode
 
 services:
 

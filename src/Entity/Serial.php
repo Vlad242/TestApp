@@ -48,7 +48,7 @@ class Serial
      */
     private $genre;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
@@ -163,13 +163,7 @@ class Serial
     {
         return $this->genre;
     }
-    /**
-     * @param mixed $ImagePath
-     */
-    public function setImagePath($ImagePath)
-    {
-        $this->imagePath = $ImagePath;
-    }
+
     /**
      * @return Season[]|Collection
      */

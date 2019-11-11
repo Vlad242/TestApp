@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -34,21 +35,20 @@ final class EpisodeAdmin extends AbstractAdmin
                 ])
             ->end()
             ->with('Upload data')
-                ->add('imagePath', TextType::class)
+                ->add('imageFile', FileType::class)
             ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
-        $datagridMapper->add('duration');
-        $datagridMapper->add('producer');
-        $datagridMapper->add('distributor');
-        $datagridMapper->add('imagePath');
-        $datagridMapper->add('season', null, [], EntityType::class, [
-            'class' => Season::class,
-            'choice_label' => 'name',
-        ]);
+        $datagridMapper->add('name')
+            ->add('duration')
+            ->add('producer')
+            ->add('distributor')
+            ->add('season', null, [], EntityType::class, [
+                'class' => Season::class,
+                'choice_label' => 'name',
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -58,7 +58,7 @@ final class EpisodeAdmin extends AbstractAdmin
             ->add('duration')
             ->add('producer')
             ->add('distributor')
-            ->add('imagePath')
-            ->add('season.name');
+            ->add('season.name')
+            ->add('imageFile', null, array('template' => '@app/resource/Views/admin/list_image.html.twig'));
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Episode
  * @ORM\Entity(repositoryClass="App\Repository\EpisodeRepository")
@@ -42,19 +44,22 @@ class Episode
      */
     private $distributor;
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
-     *
-     * @ORM\Column(name="Image_path", type="string", nullable=true)
      */
-    private $imagePath;
+    private $image;
+    /**
+     * @Vich\UploadableField(mapping="episode_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Season", inversedBy="episodes")
      */
     private $season;
+
     /**
      * Get id
-     *
-     *
      * @return int
      */
     public function getId()
@@ -145,19 +150,25 @@ class Episode
     {
         return $this->distributor;
     }
-    /**
-     * @param string $imagePath
-     */
-    public function setImagePath($imagePath)
+
+    public function setImageFile(File $image = null)
     {
-        $this->imagePath = $imagePath;
+        $this->imageFile = $image;
     }
-    /**
-     * @return mixed
-     */
-    public function getImagePath()
+
+    public function getImageFile()
     {
-        return $this->imagePath;
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
     /**
      * @return mixed
