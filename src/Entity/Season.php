@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use App\Traits\Id;
+use App\Traits\Name;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,18 +12,15 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Season
  *
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
  */
 class Season
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use Id;
+
+    use Name;
+
     /**
      * @var string
      *
@@ -61,7 +60,7 @@ class Season
      */
     private $serial;
     /**
-     * @var Episode[]| Collection
+     * @var Episode[]| ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="season")
      */
     private $episodes;
@@ -104,15 +103,7 @@ class Season
     {
         $this->serial = $serial;
     }
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
     /**
      * Set name
      *

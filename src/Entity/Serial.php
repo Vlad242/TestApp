@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Traits\Id;
+use App\Traits\Name;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,20 +17,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Serial
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Name", type="text", nullable=true)
-     */
-    private $name;
+    use Id;
+
+    use Name;
     /**
      * @var string
      *
@@ -48,7 +39,7 @@ class Serial
      */
     private $genre;
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $image;
@@ -58,7 +49,7 @@ class Serial
      */
     private $imageFile;
     /**
-     * @var Season[]| Collection
+     * @var Season[]| ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\Season", mappedBy="serial")
      */
     private $seasons;
@@ -88,30 +79,6 @@ class Serial
         return $this->image;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-    /**
-     * @param string $name
-     *
-     * @return Serial
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
     /**
      * @param string $description
      *

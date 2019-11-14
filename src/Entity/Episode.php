@@ -2,29 +2,22 @@
 
 namespace App\Entity;
 
+use App\Traits\Id;
+use App\Traits\Name;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Episode
+ *
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass="App\Repository\EpisodeRepository")
  */
 class Episode
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Name", type="text", nullable=true)
-     */
-    private $name;
+    use Id;
+
+    use Name;
     /**
      * @var float
      *
@@ -58,14 +51,6 @@ class Episode
      */
     private $season;
 
-    /**
-     * Get id
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
     /**
      * Set name
      *
