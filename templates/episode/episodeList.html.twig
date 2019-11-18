@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <h1>Episode list</h1>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="col-md-12">
+    {% for episode in  episodes%}
+        <div class="card" style="width: 18rem;">
+            <img src="{{episode.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ episode.Name }}</h5>
+                <p class="card-text">{{ episode.producer." / ".episode.distributor}}</p>
+                <a href="#" class="btn btn-primary">home</a>
+            </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

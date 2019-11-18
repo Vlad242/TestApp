@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Traits\Id;
-use App\Traits\Name;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
